@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { YOUTUBE_VIDEO_API } from '../utils/constants';
+import Shimmer from './Shimmer';
 
 import VideoCard from './VideoCard';
 
@@ -27,7 +28,7 @@ const VideoContainer = () => {
 
       setVideos(json.items);
   }
-  return (
+  return (videos?.length === 0 ) ? <Shimmer/> : (
     <React.Fragment>
         <div className='grid grid-cols-4'>
         {videos.map(video => 
