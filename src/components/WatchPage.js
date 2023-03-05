@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
 import { YOUTUBE_COMMENTS_API } from "../utils/constants";
+import CommentsContainer from "./CommentsContainer";
 import CommentsList from "./CommentsList";
 
 
@@ -49,7 +50,10 @@ const WatchPage = () => {
                 <div>
                     <h5 className="text-2xl my-4">Comments</h5>
                     {comments.map((comment) =><CommentsList key={comment.id} info={comments[0]}/>)}
-                    
+                </div>
+
+                <div>
+                    <CommentsContainer/>
                 </div>
             </div>
 

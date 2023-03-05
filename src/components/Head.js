@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleMenu } from '../utils/appSlice';
 import { YOUTUBE_SEARCH_API } from '../utils/constants';
 import { cacheResults } from '../utils/searchSlice';
+import { searchedFor } from '../utils/resultsSlice';
 
 const Head = () => {
 
@@ -70,6 +71,12 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   }
+
+  const queryClickHandler = () => {
+    if (searchquery === "") return null;
+      dispatch(searchedFor(searchquery));
+  };
+
   return (
     <React.Fragment>
     <div className='grid grid-flow-col p-2 m-1 shadow-lg'>
@@ -86,6 +93,7 @@ const Head = () => {
               onChange={(e)=> setSearchquery(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
               onBlur={() =>setShowSuggestions(false)}
+              onClick={() => queryClickHandler()}
             />
             <button className='border border-gray-400 px-4 py-2 rounded-r-full bg-gray-200'><FaSistrix/></button>
             </div>
@@ -93,7 +101,7 @@ const Head = () => {
               <div className=' py-4 justify-start ml-[17rem] absolute bg-white w-[34rem] rounded-lg shadow-lg'>
               <ul>
               {suggestions.map(suggestion=>(
-                <li key={suggestion} className='flex items-center mt-2 hover:bg-gray-100 py-2 px-2'><FaSistrix className='mx-1'/>
+                <li key={suggestion} onClick={() => queryClickHandler()} className='flex items-center mt-2 hover:bg-gray-100 py-2 px-2'><FaSistrix className='mx-1'/>
                 {suggestion}</li>
               ))}
               </ul>
